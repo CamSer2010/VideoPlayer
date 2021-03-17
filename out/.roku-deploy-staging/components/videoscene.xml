@@ -1,0 +1,59 @@
+<?xml version = "1.0" encoding = "utf-8" ?> 
+
+<!--********** Copyright 2016 Roku Corp.  All Rights Reserved. **********-->
+
+<component name = "VideoExample" extends = "Scene" >
+
+  <script type = "text/brightscript" uri = "videoscene.brs">
+
+
+  </script>
+
+  <children >
+
+    <Video 
+      id = "exampleVideo"
+      enableUI = "false"
+    />
+
+    <poster 
+      id="play"
+      uri="pkg:/images/PLAY.png"
+      translation="[630,645]"
+      height = "30"
+      width = "30"
+      visible="false"
+    />
+
+    <poster 
+      id="pause"
+      uri="pkg:/images/PAUSE.png"
+      translation="[628,645]"
+      height = "30"
+      width = "30"
+      visible="true"
+    />
+
+    <poster 
+      id="focuse"
+      uri="pkg:/images/FOCUS.png"
+      translation="[612,630]"
+      height = "60"
+      width = "60"
+      visible="TRUE"
+    />
+
+    <rectangle
+      id="rod"
+      height = "5"
+      width = "1000"
+      translation="[140,600]"
+    />
+
+    <SimpleLabel
+    
+    />
+
+  </children>
+
+</component>
