@@ -10,9 +10,14 @@ sub init()
     m.posterPause.observeField("focusedChild", "onFocusChain")
 
     m.posterFocuse = m.top.findNode("focuse")
+    m.progressRodBackground = m.top.findNode("rodBackground")
+    m.durationLabel = m.top.findNode("durationLabel")
 
     m.progressRod = m.top.findNode("rod")
     m.progressRod.observeField("focusedChild", "onFocusChain")
+
+    m.durationLabel = m.top.findNode("durationLabel")
+    m.durationLabel.observeField("focusedChild", "onFocusChain")
 
     m.video.setFocus(true)
 
@@ -31,34 +36,48 @@ sub upContent()
     m.video.content = m.videocontent
     m.video.control = "play"
 
+    'm.durationLabel.text = m.video.position
+
 end sub
 
 sub onFocusChain()
+    m.durationLabel.text = GetTime(m.video.position)
+    m.progressRod.width = (1200/100)*m.video.position
     if  m.video.isInFocusChain() then
         m.progressRod.visible = "false"
         m.posterFocuse.visible = "false"
         m.posterPlay.visible = "false"
         m.posterPause.visible = "false"
+        m.progressRodBackground.visible = "false"
+        m.durationLabel.visible = "false"
     elseif m.posterPlay.isInFocusChain() and m.video.control = "pause" 
         m.posterFocuse.visible = "true"
         m.progressRod.visible = "true"
         m.posterPlay.visible = "true"
         m.posterPause.visible = "false"
+        m.progressRodBackground.visible = "true"
+        m.durationLabel.visible = "true"
     elseif m.posterPause.isInFocusChain() and (m.video.control = "play" or m.video.control = "resume")
         m.posterFocuse.visible = "true"
         m.progressRod.visible = "true"
         m.posterPause.visible = "true"
         m.posterPlay.visible = "false"
+        m.progressRodBackground.visible = "true"
+        m.durationLabel.visible = "true"
     elseif m.progressRod.isInFocusChain() and (m.video.control = "play" or m.video.control = "resume")
         m.posterFocuse.visible = "false"
         m.progressRod.visible = "true"
         m.posterPause.visible = "true"
         m.posterPlay.visible = "false"
+        m.progressRodBackground.visible = "true"
+        m.durationLabel.visible = "true"
     elseif m.progressRod.isInFocusChain() and m.video.control = "pause" 
         m.posterFocuse.visible = "false"
         m.progressRod.visible = "true"
         m.posterPause.visible = "false"
         m.posterPlay.visible = "true"
+        m.progressRodBackground.visible = "true"
+        m.durationLabel.visible = "true"
     end if
 
 end sub
@@ -78,7 +97,10 @@ end sub
 function onKeyEvent(key as String, press as Boolean) as Boolean
     handled = true
     ?">>key ";key;">>press ";press
-    ?"STATE.VIDEO";m.video.control
+    ?">>DURATION"; m.video.duration
+    ?">>PoSITION<<"; m.video.position
+    'm.durationLabel.text = GetTime(m.video.position)
+
 
     if press then
 
@@ -115,4 +137,15 @@ function onKeyEvent(key as String, press as Boolean) as Boolean
     end if
 
    return handled
+end function
+
+function GetTime(length as Integer) as String
+    minutes = (length \ 60).ToStr()
+    seconds = length MOD 60
+    if  seconds < 10 
+        seconds = "0" + seconds.ToStr()
+    else
+        seconds = seconds.ToStr()
+    end if
+    return minutes + ":" + seconds
 end function

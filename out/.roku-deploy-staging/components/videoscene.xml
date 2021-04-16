@@ -1,7 +1,5 @@
 <?xml version = "1.0" encoding = "utf-8" ?> 
 
-<!--********** Copyright 2016 Roku Corp.  All Rights Reserved. **********-->
-
 <component name = "VideoExample" extends = "Scene" >
 
   <script type = "text/brightscript" uri = "videoscene.brs">
@@ -44,14 +42,22 @@
     />
 
     <rectangle
-      id="rod"
-      height = "5"
-      width = "1000"
-      translation="[140,600]"
+      id="rodBackground"
+      height = "9"
+      width = "1200"
+      translation="[40,598]"
     />
 
-    <SimpleLabel
-    
+    <rectangle
+      id="rod"
+      height = "5"
+      color = "0xE81D1D"
+      translation="[40,600]"
+    />
+
+    <label
+      id="durationLabel"
+      translation="[1160,570]"
     />
 
   </children>
