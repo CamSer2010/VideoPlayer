@@ -36,8 +36,6 @@ sub upContent()
     m.video.content = m.videocontent
     m.video.control = "play"
 
-    'm.durationLabel.text = m.video.position
-
 end sub
 
 sub onFocusChain()
